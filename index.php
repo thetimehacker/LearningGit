@@ -18,15 +18,13 @@
 			
 			<div class="col-sm-4">
 				<div class="contain_form">
-					<!-- <center> -->
 					<h2>Sign Up</h2>
 					<form id="signupform">
-						<input type="text" id="username" placeholder="User Id" class="form-control" required><br><br>
-						<input type="password" id="password" placeholder="Password"><br><br>
-						<input type="password" id="password" placeholder="Confirm Password"><br><br>
-						<input type="submit" value="Submit" class="btn btn-primary">
+						<input type="text" id="username" placeholder="User Id" class="form-control" required><br>
+						<input type="password" id="password" placeholder="Password" class="form-control" required><br>
+						<input type="password" id="password" placeholder="Confirm Password" class="form-control" required><br>
+						<input type="submit" value="Submit" class="form-control">
 					</form> 
-					<!-- </center> -->
 				</div>
 				
 			</div>

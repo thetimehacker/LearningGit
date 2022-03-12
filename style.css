@@ -1,21 +1,16 @@
 .contain_form {
-			/*width: 40%;*/
-			
-			border-radius: 10px;
-			background-color: #f2f2f2;
-			padding: 20px;
-			text-align: center;
-			margin-top: ;
-			margin: 236px 10px;
-		}
-		input {
-			/*width: 20%;*/
-			padding: 5px;
-			border-radius: 10px;
-			border-width: 1px;
-		}
-		input[type=submit]{
-			background-color: #FFA500;
-			padding-right: 20px;
-			padding-left: 20px;
-		}
+	border-radius: 10px;
+	background-color: #f2f2f2;
+	padding: 20px;
+	text-align: center;
+	margin-top: ;
+	margin: 236px 10px;
+}
+/*input {
+	padding: 5px;
+	border-radius: 50px;
+	border-width: 1px;
+}*/
+input[type=submit]{
+	background-color: #FFA500;
+}

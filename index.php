@@ -20,10 +20,18 @@
 				<div class="contain_form">
 					<h2>Sign Up</h2>
 					<form id="signupform">
-						<input type="text" id="username" placeholder="User Id" class="form-control" required><br>
-						<input type="password" id="password" placeholder="Password" class="form-control" required><br>
-						<input type="password" id="password" placeholder="Confirm Password" class="form-control" required><br>
-						<input type="submit" value="Submit" class="form-control">
+						<div class="input-form">
+							<input type="text" id="username" placeholder="User Id" class="form-control" required><br>
+						</div>
+						<div class="input-form">
+							<input type="password" id="password" placeholder="Password" class="form-control" required><br>
+						</div>
+						<div class="input-form">
+							<input type="password" id="password" placeholder="Confirm Password" class="form-control" required><br>
+						</div>
+						<div class="input-form">
+							<input type="submit" value="Submit" class="form-control">
+						</div>
 					</form> 
 				</div>
 				

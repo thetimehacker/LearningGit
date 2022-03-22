@@ -7,8 +7,7 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="normalize.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-	
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"> -->
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -21,13 +20,61 @@
 			
 			<div class="col-sm-4">
 				<div class="contain_form">
-					<h2>Sign Up</h2>
+					<div class="Heading">
+						<h2 style="margin-bottom: 20px;">Sign Up</h2>
+					</div>
 					<form id="signupform">
-						<input type="text" id="username" placeholder="User Id" class="form-control" required><br>
-						<input type="password" id="password1" placeholder="Password" class="form-control" required><br>
-						<input type="password" id="password2" placeholder="Confirm Password" class="form-control" required><br>
-						<input type="submit" value="Submit" class="form-control" onclick="savedata();">
+						<div class="form-group">
+							<input type="text" id="username" placeholder="User Id" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="text" id="email" placeholder="Email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="password" id="password1" placeholder="Password" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="password" id="password2" placeholder="Confirm Password" class="form-control" required>
+						</div>
+
+
+						<!-- Radio button for selection of CLUB AND STUDENT COORDINATOR -->
+						<!-- Name attribute is important to make a group - and each group in a radio button can have a single selection --- if not given then it will act like a checkbox with multiple selections -->
+						<div class="radio_selection form-group">
+							<input type="radio" id="none" name="coordinator_selection" value="none" checked>
+							<label for="none">None</label>
+
+							<input type="radio" id="club_coordinator" name="coordinator_selection" value="club_coordinator">
+							<label for="club_coordinator">Club Coordinator</label>
+
+							<input type="radio" id="student_coordinator" name="coordinator_selection" value="student_coordinator">
+							<label for="student_coordinator">Student Coordinator</label>
+						</div>
+
+						<!-- Submit Button -->
+						<div class="form-group">
+							<input type="submit" value="Submit" class="btn btn-success btn-block" onclick="savedata();">
+						</div>	
+
 					</form> 
+				</div>
+				<div class="horizontal_line">
+					<hr>
+				</div>
+				<div class="login_button">
+					<a href="login.php" style="
+						padding: 10px 10px;
+					    border: 1px solid black;
+					    background: black;
+					    color: white;
+					    border-radius: 10px;
+					    text-decoration: 4none;
+					    display: inherit;
+					    text-align: center;">
+
+						Log In
+
+					</a>
 				</div>
 			</div>
 			
@@ -36,13 +83,23 @@
 	</section>
 				
 <script type="text/javascript">
-	
 	function savedata(){
 		var username=document.getElementById('username').value;
 		var pass1=document.getElementById('password1').value;
 		var pass2=document.getElementById('password2').value;
+		var email=document.getElementById('email').value;
+
+		
+		var coordinator = document.getElementsByName('coordinator_selection');
+		var c_value="";
+		for(var i = 0; i < coordinator.length; i++){
+		    if(coordinator[i].checked){
+		        c_value = coordinator[i].value;
+		    }
+		}
+
 		// alert(username);
-		if(username!="" && pass1!="" && pass1==pass2){
+		if(username!="" && pass1!="" && pass1==pass2 && c_value!="" && email!=""){
 			
 			//sending data to backend
 			//using ajax post
@@ -50,13 +107,23 @@
 			$.ajax(
 			{
 				type:"POST",
-				url:"data.php",
-				data:{username:username,password:pass1},
+				url:"ajax/signup.php",
+				data:{username:username,password:pass1,c_value:c_value,email:email},
 				success:function(data){
 					alert(data);
 				}
 			}
 			);
+
+			//--->to go to login page
+			//Approach 1 -- opens in same window
+			// window.location.href = "login.php";
+
+			//Approach 2 -- opens in a new window
+			// open("login.php");
+
+			//solution to Approach 2
+			open("login.php","_self");
 		}
 		else 
 		{

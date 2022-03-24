@@ -1,11 +1,29 @@
+body{
+	background: url("bg2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
 .contain_form {
 	border-radius: 11px;
-	background-color: #f2f2f2;
+	/*background-color: #f2f2f2;*/
+	background: url("bg2.jpg");
+	background-position: center;
 	padding: 20px 50px;
 	text-align: center;
 	margin-top: 100px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.contain_login_form {
+	border-radius: 11px;
+	/*background-color: #f2f2f2;*/
+	background: url("bg2.jpg");
+	background-position: center;
+	padding: 20px 50px;
+	text-align: center;
+	margin-top: 200px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 #login_button{
 	background-color: dimgrey;
 }

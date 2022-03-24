@@ -68,9 +68,10 @@
 					    background: black;
 					    color: white;
 					    border-radius: 10px;
-					    text-decoration: 4none;
+					    text-decoration: none;
 					    display: inherit;
-					    text-align: center;">
+					    text-align: center;
+					    text-decoration: none;">
 
 						Log In
 
@@ -81,7 +82,7 @@
 			<div class="col-sm-4"></div>
 		</div>
 	</section>
-				
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function savedata(){
 		var username=document.getElementById('username').value;
@@ -103,27 +104,45 @@
 			
 			//sending data to backend
 			//using ajax post
-			
+			alert('sending data');
 			$.ajax(
 			{
 				type:"POST",
 				url:"ajax/signup.php",
 				data:{username:username,password:pass1,c_value:c_value,email:email},
 				success:function(data){
-					alert(data);
+					//we are getting the result in form of data from the signup php
+					if(data == 0){
+						alert('User already exists!');
+					}
+					else if(data == 1){
+						//account created
+						alert('Successfully created account!!!');
+
+						//--->to go to login page
+						//Approach 1 -- opens in same window
+						// window.location.href = "login.php";
+
+						//Approach 2 -- opens in a new window
+						// open("login.php");
+
+						//solution to Approach 2
+						open("login.php","_self");
+
+					}
+					else if(data == 2){
+						alert('Some problem encountered!');
+					}
+					else if(data == 3){
+						alert('Inside validation');
+					}
+					else{
+						alert(data);
+					}
 				}
 			}
 			);
 
-			//--->to go to login page
-			//Approach 1 -- opens in same window
-			// window.location.href = "login.php";
-
-			//Approach 2 -- opens in a new window
-			// open("login.php");
-
-			//solution to Approach 2
-			open("login.php","_self");
 		}
 		else 
 		{

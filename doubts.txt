@@ -1,0 +1,14 @@
+Day 1 : mar 21
+1. where we will save our data and how to get that data in login php
+2. Why we have wrote 2 scripts : 1 for onclick and ajax and second for changing the default action of form
+3. How to go to another page using button 
+4. can we have same class name and id
+
+Day 2 : march 24
+1. why question marks are used
+2. why array in line 15? can it be run without using array
+3. why the line 23 is not in else statement
+4. what is statement in line 113 of my index.php? is echo returning the data
+5. why line 90 in bhaiya's file will run in signup.php
+6. line 24 bhaiya file - making use of password_hash and password_default
+7. line 12 in login file of bhaiya --- our rowcount will be 0 or 1... so is there any need of while?

@@ -20,16 +20,28 @@
 			
 			<div class="col-sm-4">
 				<div class="contain_form">
-					<h2>Log In</h2>
-					<form id="signupform">
-						<input type="text" id="username" placeholder="User Id" class="form-control" required><br>
-						<input type="password" id="password" placeholder="Password" class="form-control" required><br>
-						<input type="submit" value="Submit" class="btn btn-success btn-block" onclick="savedata();">
+					<div class="Heading">
+						<h2 style="margin-bottom: 20px;">Log In</h2>
+					</div>
+					<form id="loginform">
+						<div class="form-group">
+							<input type="text" id="username" placeholder="User Id" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="password" id="password" placeholder="Password" class="form-control" required>
+						</div>
+
+						<!-- Submit Button -->
+						<div class="form-group">
+							<input type="submit" value="Submit" class="btn btn-success btn-block" onclick="savelogindata();">
+						</div>	
+
 					</form> 
 				</div>
-				<hr>
-				<div class="login_button">
-					<!-- <button id="login_button" class="btn btn-lg btn-block" type="submit" value="Log In" onclick="signup();">Sign Up</button> -->
+				<div class="horizontal_line">
+					<hr>
+				</div>
+				<div class="signup_button">
 					<a href="index.php" style="
 						padding: 10px 10px;
 					    border: 1px solid black;
@@ -38,9 +50,10 @@
 					    border-radius: 10px;
 					    text-decoration: none;
 					    display: inherit;
-					    text-align: center;">
+					    text-align: center;
+					    text-decoration: none;">
 
-						Sign Up
+						Create Account
 
 					</a>
 				</div>
@@ -49,8 +62,83 @@
 			<div class="col-sm-4"></div>
 		</div>
 	</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function savelogindata(){
+		var username=document.getElementById('username').value;
+		var password=document.getElementById('password').value;
 
-</script>	
+		// alert(username);
+		if(username!="" && password!=""){
+			
+			//sending data to backend
+			//using ajax post
+			alert('sending data');
+			$.ajax(
+			{
+				type:"POST",
+				url:"ajax/login.php",
+				data:{username:username,password:password},
+				success:function(data){
+
+					//we are getting the result in form of data from the login php
+					if(data == 0){
+						alert('Account Does not exist!');
+					}
+					else if(data == 2){
+						alert('Invalid details!!');
+					}
+					else if(data == 11){
+						//account created
+						alert('Valid Details!! ADMIN');
+
+						//--->to go to login page
+						//Approach 1 -- opens in same window
+						// window.location.href = "login.php";
+
+						//Approach 2 -- opens in a new window
+						// open("login.php");
+
+						//solution to Approach 2
+						// open("login.php","_self");
+
+					}
+					else if(data == 12){
+						//account created
+						alert('Valid Details!! CLUB COORDINATOR');
+
+						// open("login.php","_self");
+
+					}
+					else if(data == 13){
+						//account created
+						alert('Valid Details!! STUDENT COORDINATOR');
+
+						// open("login.php","_self");
+					}
+					else if(data == 14){
+						//account created
+						alert('Valid Details!! NONE');
+
+						// open("login.php","_self");
+
+					}
+					else{
+						alert(data);
+					}
+				}
+			}
+			);
+
+		}
+		else 
+		{
+			alert("Invalid Input!");
+		}
+		
+	}
+	
+</script>
 <script type="text/javascript">
     $('form').submit(function(e) {
     e.preventDefault();

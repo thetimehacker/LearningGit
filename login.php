@@ -74,7 +74,7 @@
 			
 			//sending data to backend
 			//using ajax post
-			alert('sending data');
+			// alert('sending data');
 			$.ajax(
 			{
 				type:"POST",
@@ -90,8 +90,8 @@
 						alert('Invalid details!!');
 					}
 					else if(data == 11){
-						//account created
-						alert('Valid Details!! ADMIN');
+						//account created for admin
+						// alert('Valid Details!! ADMIN');
 
 						//--->to go to login page
 						//Approach 1 -- opens in same window
@@ -101,7 +101,7 @@
 						// open("login.php");
 
 						//solution to Approach 2
-						// open("login.php","_self");
+						open("adminhome.php","_self");
 
 					}
 					else if(data == 12){
@@ -119,7 +119,7 @@
 					}
 					else if(data == 14){
 						//account created
-						alert('Valid Details!! NONE');
+						alert('Valid Details!! student');
 
 						// open("login.php","_self");
 

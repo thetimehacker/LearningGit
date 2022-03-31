@@ -7,7 +7,7 @@
 	$pass = $_POST['password'];
 	// echo $uname.' '.$pass.' ';
 
-	//-->> validate email and username 
+	//-->> validate email and username `
 
 
 
@@ -27,6 +27,7 @@
 			//fetch the data from database
 			$datarow=$check->fetch();
 
+			//flag will define whether the higher authorities have allowed them or not
 			if($pass==$datarow['password']){
 				//valid details
 				if($datarow['c_value']=="admin"){

@@ -37,10 +37,12 @@
 							<input type="password" id="password2" placeholder="Confirm Password" class="form-control" required>
 						</div>
 
-
+						<div class="form-group">
+							<input type="text" id="uid" placeholder="UID" class="form-control" >
+						</div>
 						<!-- Radio button for selection of CLUB AND STUDENT COORDINATOR -->
 						<!-- Name attribute is important to make a group - and each group in a radio button can have a single selection --- if not given then it will act like a checkbox with multiple selections -->
-						<div class="radio_selection form-group">
+						<!-- <div class="radio_selection form-group">
 							<input type="radio" id="none" name="coordinator_selection" value="none" checked>
 							<label for="none">None</label>
 
@@ -49,7 +51,7 @@
 
 							<input type="radio" id="student_coordinator" name="coordinator_selection" value="student_coordinator">
 							<label for="student_coordinator">Student Coordinator</label>
-						</div>
+						</div> -->
 
 						<!-- Submit Button -->
 						<div class="form-group">
@@ -90,18 +92,19 @@
 		var pass1=document.getElementById('password1').value;
 		var pass2=document.getElementById('password2').value;
 		var email=document.getElementById('email').value;
+		var uid=document.getElementById('uid').value;
 
 		
-		var coordinator = document.getElementsByName('coordinator_selection');
-		var c_value="";
-		for(var i = 0; i < coordinator.length; i++){
-		    if(coordinator[i].checked){
-		        c_value = coordinator[i].value;
-		    }
-		}
+		// var coordinator = document.getElementsByName('coordinator_selection');
+		// var c_value="";
+		// for(var i = 0; i < coordinator.length; i++){
+		//     if(coordinator[i].checked){
+		//         c_value = coordinator[i].value;
+		//     }
+		// }
 
 		// alert(username);
-		if(username!="" && pass1!="" && pass1==pass2 && c_value!="" && email!=""){
+		if(username!="" && pass1!="" && pass1==pass2 && email!=""){
 			
 			//sending data to backend
 			//using ajax post
@@ -110,7 +113,7 @@
 			{
 				type:"POST",
 				url:"ajax/signup.php",
-				data:{username:username,password:pass1,c_value:c_value,email:email},
+				data:{username:username,password:pass1,email:email, uid:uid},
 				success:function(data){
 					//we are getting the result in form of data from the signup php
 					if(data == 0){

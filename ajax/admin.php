@@ -7,7 +7,7 @@
 	$pass = $_POST['password'];
 	// $c_value= $_POST['c_value'];
 	$email= $_POST['email'];
-	$uid=$_POST['uid'];
+	$cvalue="club_coordinator";
 	// echo $uname.' '.$pass.' '.$c_value.' '.$email;
 
 	//-->> validate email and username 
@@ -16,7 +16,6 @@
 
 	if(validate()){
 
-		// echo 3;
 		//preparing a query
 		//we will be checking both email and password
 		
@@ -24,27 +23,21 @@
 		$data=array($email,$uname); //for below 'if' statement
 		
 		//we want email and username both unique ... thats why we used email and username in prepare query
-		
-		if($uid!=""){
-			$check=$db->prepare('SELECT * FROM Signup_form_data WHERE  email = ? OR user_name = ? OR uid = ?');
-			$data=array($email,$uname,$uid);
-		}
 
 		//execute the query by combining data in the check table
 		$check->execute($data);
-		if($check->rowcount()==1){ //count will always be 0 or 1
-			//account already exists
+		if($check->rowcount()==1){
 			echo 0; //->> 0 for already exist account
 		}
 		else{
 			
 			//we will create a new account
-			//encrypt the password 
+			//encrypt the password
 			//-->>> $password1_hash=password_hash($pass,PASSWORD_DEFAULT); <-- bhaiya file
 
 			//creating a new query
-			$query=$db->prepare("INSERT INTO Signup_form_data(user_name,password,email,uid) VALUES (?,?,?,?)");
-			$data=array($uname,$pass,$email,$uid);
+			$query=$db->prepare("INSERT INTO Signup_form_data(user_name,password,c_value,email) VALUES (?,?,?,?)");
+			$data=array($uname,$pass,$cvalue,$email);
 
 			//execute 
 			if($query->execute($data)){

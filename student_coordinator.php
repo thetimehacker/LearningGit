@@ -84,25 +84,22 @@
 		var eligibility=document.getElementById('eligibility').value;
 		var description=document.getElementById('description').value;
 
-		if(username!="" && pass1!="" && pass1==pass2 && email!=""){
+		if(title!="" && date!="" && venue!="" && eligibility!="" && description!=""){
 			
-			//sending data to backend
-			//using ajax post
-			// alert('sending data');
+	
 			$.ajax(
 			{
 				type:"POST",
-				url:"ajax/admin.php",
-				data:{username:username,password:pass1,email:email}, //cvalue will be passed in ajax
+				url:"ajax/add_activity.php",
+				data:{title:title,date:date,venue:venue,eligibility:eligibility,description:description}, //cvalue will be passed in ajax
 				success:function(data){
-					//we are getting the result in form of data from the signup php
 					if(data == 0){
-						alert('User already exists!');
+						alert('Activity already exists!');
 					}
 					else if(data == 1){
 						//account created
-						alert('Successfully created club coordinator!!!');
-						open("adminhome.php","_self"); //refresh the page
+						alert('Successfully created activity!!!');
+						open("student_coordinator.php","_self"); //refresh the page
 
 					}
 					else if(data == 2){

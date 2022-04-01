@@ -115,7 +115,7 @@
 						//account created
 						alert('Valid Details!! STUDENT COORDINATOR');
 
-						// open("login.php","_self");
+						open("student_coordinator.php","_self");
 					}
 					else if(data == 14){
 						//account created

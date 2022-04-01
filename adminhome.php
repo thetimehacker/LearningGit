@@ -47,7 +47,8 @@
 					<!-- //create php  -->
 					<h4 style="text-align: center;">Remove Club coordinator</h4>
 					<?php
-
+						session_start();
+						
 						include('connection.php');
 						$check=$db->prepare('SELECT * FROM Signup_form_data WHERE c_value="club_coordinator"');
 						$check->execute();
@@ -60,13 +61,14 @@
 
 					?>
 
-					<form id="adminform">
+					<form id="adminform" action="adminhome.php" method="post">
 						<div class="form-group">
-							<label for="username" id="user_label"><?php echo $datarow['user_name']; ?></label>
-						    <!-- <img src="tick.png" style="height: 25px;width: 25px;">
-						    <img src="cross.png" style="height: 25px;width: 25px;"> -->
+							<label><?php echo $datarow['user_name']; ?></label>
 
-							<input type="submit" value="Remove" onclick="remove();" style="text-decoration:none;
+						    <input type="hidden" id="user_label2" value=<?php echo $datarow['email'];?> >
+
+							<input type="submit" value="Remove" onclick="remove();" 
+								style="text-decoration:none;
 								background: red;
 								border: none;
 								border-radius: 5px;
@@ -104,11 +106,9 @@
 
 					<form id="adminform">
 						<div class="form-group">
-							<label for="username" id="activity_title"><?php echo $datarow['title']; ?></label>
-						    <!-- <img src="tick.png" style="height: 25px;width: 25px;">
-						    <img src="cross.png" style="height: 25px;width: 25px;"> -->
-
-							<input type="submit" value="Approve" onclick="remove();" style="text-decoration:none;
+							<label ><?php echo $datarow['title']; ?></label>
+							<input type="hidden" id="activity_title" value=<?php echo $datarow['title']; ?> >
+							<input type="submit" value="Approve" onclick="approve();" style="text-decoration:none;
 								background:green;
 								border: none;
 								border-radius: 5px;
@@ -157,9 +157,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+	function approve(){
+		var title=document.getElementById('activity_title').value;
+		$.ajax(
+			{
+				type:"POST",
+				url:"ajax/admin_approve.php",
+				data:{title:title},
+				success:function(data){
+					
+					if(data == 1){
+						//activity approved
+						alert('Activity Approved');
+						open("adminhome.php","_self"); //refresh the page
+
+					}
+					else{
+						alert('Some problem encountered!');
+					}
+				}
+			}
+			);
+	}
 
 	function remove(){
-		var username=document.getElementById('user_label').innerText;
+		var username=document.getElementById('user_label2').value;
+		// var username=x;
 		$.ajax(
 			{
 				type:"POST",
@@ -173,7 +196,7 @@
 						open("adminhome.php","_self"); //refresh the page
 
 					}
-					else if(data == 2){
+					else{
 						alert('Some problem encountered!');
 					}
 				}

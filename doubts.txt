@@ -59,3 +59,45 @@ showing table code
 						<input type="submit" value="Submit" class="btn btn-success btn-block" onclick="add();">
 					</div>	
 				</div>
+
+
+
+<div class="approve_activities" style="text-align: left;margin-bottom: 20px;">
+						<!-- //create php  -->
+						<h4 style="text-align: center;">Approve Activities</h4>
+						<?php
+
+							include('connection.php');
+							$check=$db->prepare('SELECT * FROM student_coordinator WHERE flag=0');
+							$check->execute();
+							if($check->rowcount()==0){
+								echo 'Empty Table'; //->> 0 for account does not exist
+							}
+
+							else{
+								while($datarow=$check->fetch()){
+
+						?>
+
+						<form id="adminform">
+							<div class="form-group">
+								<label ><?php echo $datarow['title']; ?></label>
+								<input type="hidden" id="activity_title" value=<?php echo $datarow['title']; ?> >
+								<input type="submit" value="Approve" onclick="approve();" style="text-decoration:none;
+									background:green;
+									border: none;
+									border-radius: 5px;
+									padding: 5px;
+									color: white;
+									margin-left: 10px;">
+
+							</div>
+							
+						</form> 
+
+						<?php
+								}
+							}
+						?>
+
+					</div>

@@ -14,9 +14,9 @@
 	if(validate()){
 
 		//preparing a query
-		$check=$db->prepare('SELECT * FROM Signup_form_data WHERE user_name = ?');
+		$check=$db->prepare('SELECT * FROM signup WHERE uid = ? or email = ?');
 
-		$data=array($uname);
+		$data=array($uname,$uname);
 		//execute the query by combining data in the check table
 		$check->execute($data);
 		if($check->rowcount()==0){ //count will always be 0 or 1
@@ -30,13 +30,13 @@
 			//flag will define whether the higher authorities have allowed them or not
 			if($pass==$datarow['password']){
 				//valid details
-				if($datarow['c_value']=="admin"){
+				if($datarow['value']=="admin"){
 					echo 11;
 				}
-				else if($datarow['c_value']=="club_coordinator"){
+				else if($datarow['value']=="club_coordinator"){
 					echo 12;
 				}
-				else if($datarow['c_value']=="student_coordinator"){
+				else if($datarow['value']=="student_coordinator"){
 					echo 13;
 				}
 				else{

@@ -3,7 +3,7 @@
 	include('../connection.php');
 
 	//-->> trim all the data using a trim function
-	$uname = $_POST['username'];
+	$uid = $_POST['uid'];
 	$pass = $_POST['password'];
 	// $c_value= $_POST['c_value'];
 	$email= $_POST['email'];
@@ -19,8 +19,8 @@
 		//preparing a query
 		//we will be checking both email and password
 		
-		$check=$db->prepare('SELECT * FROM Signup_form_data WHERE  email = ? OR user_name = ?');
-		$data=array($email,$uname); //for below 'if' statement
+		$check=$db->prepare('SELECT * FROM signup WHERE  email = ? OR uid = ?');
+		$data=array($email,$uid); //for below 'if' statement
 		
 		//we want email and username both unique ... thats why we used email and username in prepare query
 
@@ -36,8 +36,8 @@
 			//-->>> $password1_hash=password_hash($pass,PASSWORD_DEFAULT); <-- bhaiya file
 
 			//creating a new query
-			$query=$db->prepare("INSERT INTO Signup_form_data(user_name,password,c_value,email) VALUES (?,?,?,?)");
-			$data=array($uname,$pass,$cvalue,$email);
+			$query=$db->prepare("INSERT INTO signup(password, email, uid, value) VALUES (?,?,?,?)");
+			$data=array($pass,$email,$uid,$cvalue);
 
 			//execute 
 			if($query->execute($data)){

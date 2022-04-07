@@ -1,3 +1,11 @@
+	.hidden
+	{
+		display: none;
+	}
+	.show
+	{
+		display: block;
+	}
 body{
 	background: url("bg2.jpg");
 	background-repeat: no-repeat;
@@ -6,6 +14,7 @@ body{
 	min-height: 100vh;
 	max-height: 100vh;
 }
+
 .contain_form {
 	border-radius: 11px;
 	/*background-color: #f2f2f2;*/

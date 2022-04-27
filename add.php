@@ -112,9 +112,9 @@
 	}
 	
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $('form').submit(function(e) {
     e.preventDefault();
-});</script>
+});</script> -->
 </body>
 </html>	

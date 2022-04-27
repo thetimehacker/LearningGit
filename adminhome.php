@@ -47,10 +47,6 @@
 	</section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-	
-</script>
-<script type="text/javascript">
     $('form').submit(function(e) {
     e.preventDefault();
 });</script>

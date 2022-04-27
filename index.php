@@ -194,14 +194,18 @@
 				data:{username:username,password:password},
 				success:function(data){
 
+					var response = data.split(",");
+					var first = response[0];
+				  	var second = response[1];
+
 					//we are getting the result in form of data from the login php
-					if(data == 0){
+					if(data==0){
 						alert('Account Does not exist!');
 					}
-					else if(data == 2){
+					else if(data==2){
 						alert('Invalid details!!');
 					}
-					else if(data == 11){
+					else if(first=="11"){
 						//account created for admin
 						// alert('Valid Details!! ADMIN');
 
@@ -213,23 +217,27 @@
 						// open("login.php");
 
 						//solution to Approach 2
+						alert(second);
+						
 						open("adminhome.php","_self");
 
 					}
-					else if(data == 12){
+					else if(first=="12"){
 						//account created
 						alert('Valid Details!! CLUB COORDINATOR');
 
 						// open("login.php","_self");
 
 					}
-					else if(data == 13){
+					else if(first=="13"){
 						//account created
-						alert('Valid Details!! STUDENT COORDINATOR');
+						
+
+						alert(second);
 
 						open("student_coordinator.php","_self");
 					}
-					else if(data == 14){
+					else if(data==14){
 						//account created
 						alert('Valid Details!! student');
 

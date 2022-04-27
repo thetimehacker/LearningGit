@@ -5,8 +5,8 @@
 	//-->> trim all the data using a trim function
 	$title= $_POST['title'];
 	$date= $_POST['date'];
-	$venue= $_POST['venue'];
-	$eligibility= $_POST['eligibility'];
+	// $venue= $_POST['venue'];
+	// $eligibility= $_POST['eligibility'];
 	$description= $_POST['description'];
 
 	
@@ -18,7 +18,7 @@
 	if(validate()){
 
 		
-		$check=$db->prepare('SELECT * FROM student_coordinator WHERE  title = ?');
+		$check=$db->prepare('SELECT * FROM activity WHERE  aname = ?');
 		$data=array($title); 
 
 		$check->execute($data);
@@ -29,8 +29,8 @@
 			
 
 			//creating a new query
-			$query=$db->prepare("INSERT INTO student_coordinator(title,date,venue,eligibility,description) VALUES (?,?,?,?,?)");
-			$data=array($title,$date,$venue,$eligibility,$description);
+			$query=$db->prepare("INSERT INTO activity(sid,aname, date, description) VALUES (?,?,?,?)");
+			$data=array(5,$title,$date,$description);
 
 			//execute 
 			if($query->execute($data)){

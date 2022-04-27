@@ -6,7 +6,7 @@
 	$uname = $_POST['username'];
 	$pass = $_POST['password'];
 	// echo $uname.' '.$pass.' ';
-
+	$_SESSION['sid']=0;
 	//-->> validate email and username `
 
 
@@ -20,7 +20,8 @@
 		//execute the query by combining data in the check table
 		$check->execute($data);
 		if($check->rowcount()==0){ //count will always be 0 or 1
-			echo 0; //->> 0 for account does not exist
+			echo 0;
+			// echo "0,1"; //->> 0 for account does not exist
 		}
 		else{
 			
@@ -31,20 +32,31 @@
 			if($pass==$datarow['password']){
 				//valid details
 				if($datarow['value']=="admin"){
-					echo 11;
+					$arr="11,";
+					$arr.=(string)$datarow['sid'];
+					$_SESSION=$datarow['sid'];
+					echo $arr;
+					// echo 11;
 				}
 				else if($datarow['value']=="club_coordinator"){
-					echo 12;
+					$arr="12,";
+					$arr.=(string)$datarow['sid'];
+					echo $arr;
+					// echo 12;
 				}
 				else if($datarow['value']=="student_coordinator"){
-					echo 13;
+					$arr="13,";
+					$arr.=(string)$datarow['sid'];
+					// echo $arr;
+					echo $arr;
 				}
 				else{
 					echo 14;
 				}
 			}
 			else {
-				echo 2; //invalid details
+				echo 2;
+				// echo "2,1"; //invalid details
 			}
 
 		}

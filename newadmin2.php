@@ -87,15 +87,18 @@ div.content {
 <body> 
   
 
-<div class="sidebar">
-  <a class="active" href="#home">Home</a>
-  <a href="index.php">Sign Out</a>
-</div>
+
 
 <div class="content">
   <section id="adminform" class="section_class">
 		<div class="col-sm-12">
-			<div class="col-sm-6">
+			<div class="col-sm-2" style="margin-left:0px !important;">
+				<div class="sidebar">
+				  <a class="active" href="#home">Home</a>
+				  <a href="index.php">Sign Out</a>
+				</div>
+			</div>
+			<div class="col-sm-5">
 					<!-- //all club coordinators -->
 					
 			
@@ -141,21 +144,21 @@ div.content {
 						<div class="admin_heading" style="margin-bottom: 20px;">
 							<h1 style="text-align: center;">Delete Club Coordinator</h1>
 						</div>
-						<form id="adminform1">
+						<form id="adminform">
 							<div class="form-group">
-								<input type="text" id="delete_id" placeholder="User Id" class="form-control" required>
+								<input type="text" id="uid" placeholder="User Id" class="form-control" required>
 							</div>
 							<div class="form-group">
-								<input type="text" id="delete_email" placeholder="Email" class="form-control" required>
+								<input type="text" id="email" placeholder="Email" class="form-control" required>
 							</div>
 							<div class="form-group">
-								<input type="submit" value="Submit" class="btn btn-danger btn-block" onclick="deletedata();">
+								<input type="submit" value="Submit" class="btn btn-danger btn-block" onclick="savedata();">
 							</div>	
 						</form>
 					</div>
 			</div>
 
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 				
 					<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
 						<div class="admin_heading" style="margin-bottom: 20px;">
@@ -229,48 +232,7 @@ div.content {
 		}
 		
 	}
-	function deletedata(){
-		var uid=document.getElementById('delete_id').value;
-		var email=document.getElementById('delete_email').value;
-
-		// alert(uid+" "+email);
-		if(uid!="" && email!=""){
-			
-			//sending data to backend
-			//using ajax post
-			// alert('sending data');
-			$.ajax(
-			{
-				type:"POST",
-				url:"ajax/admin_remove_club_coordinator.php",
-				data:{uid:uid,email:email},
-				success:function(data){
-					if(data==0){
-						alert('Invalid details / Account Does not exist!!!');
-					}
-					else if(data == 1){
-						//account created
-						alert('Successfully removed club coordinator!!!');
-						open("newadmin.php","_self"); //refresh the page
-
-					}
-					else if(data == 2){
-						alert('Some problem encountered!');
-					}
-					else{
-						alert(data);
-					}
-				}
-			}
-			);
-
-		}
-		else 
-		{
-			alert("Invalid Input!");
-		}
-		
-	}
+	
 </script>
 <script type="text/javascript">
     $('form').submit(function(e) {

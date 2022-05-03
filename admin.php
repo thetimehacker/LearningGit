@@ -15,7 +15,7 @@
 <body>
 	<section>
 		<div class="col-sm-12">
-			<div class="col-sm-2" style="background: black; min-height: 100vh; max-height: 100vh;"></div>
+			<div class="col-sm-2" style="margin-left: 0px !important;background: black; min-height: 100vh; max-height: 100vh;"></div>
 			
 			<div class="col-sm-10" style=" min-height: 100vh; max-height: 100vh;">
 				<div class="col-sm-4"></div>

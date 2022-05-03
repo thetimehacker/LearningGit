@@ -217,7 +217,7 @@
 						// open("login.php");
 
 						//solution to Approach 2
-						alert(second);
+						// alert(second);
 						
 						open("newadmin.php","_self");
 
@@ -235,7 +235,7 @@
 
 						alert(second);
 
-						open("student_coordinator.php","_self");
+						open("newstudentcoordinator.php","_self");
 					}
 					else if(data==14){
 						//account created

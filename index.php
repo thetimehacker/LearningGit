@@ -219,7 +219,7 @@
 						//solution to Approach 2
 						alert(second);
 						
-						open("adminhome.php","_self");
+						open("newadmin.php","_self");
 
 					}
 					else if(first=="12"){

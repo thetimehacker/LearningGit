@@ -5,7 +5,7 @@
 	$username = $_POST['username'];
 
 		
-	$check=$db->prepare('DELETE FROM Signup_form_data WHERE user_name= ?');
+	$check=$db->prepare('DELETE FROM signup WHERE sid= ?');
 	$data=array($username);
 	
 	if($check->execute($data)){

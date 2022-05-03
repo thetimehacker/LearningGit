@@ -6,7 +6,7 @@
 	$uname = $_POST['username'];
 	$pass = $_POST['password'];
 	// echo $uname.' '.$pass.' ';
-	$_SESSION['sid']=0;
+	// $_SESSION['sid']=0;
 	//-->> validate email and username `
 
 
@@ -34,7 +34,7 @@
 				if($datarow['value']=="admin"){
 					$arr="11,";
 					$arr.=(string)$datarow['sid'];
-					$_SESSION=$datarow['sid'];
+					// $_SESSION=$datarow['sid'];
 					echo $arr;
 					// echo 11;
 				}

@@ -38,7 +38,7 @@
 			
 			<div class="col-sm-4">
 					<div class="admin_heading">
-						<h1 style="text-align: center;">Remove Club Coordinator</h1>
+						<h1 style="text-align: center;">Remove Activities</h1>
 					</div>
 			
 					<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">

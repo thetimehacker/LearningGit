@@ -224,9 +224,9 @@
 					}
 					else if(first=="12"){
 						//account created
-						alert('Valid Details!! CLUB COORDINATOR');
+						// alert('Valid Details!! CLUB COORDINATOR');
 
-						// open("login.php","_self");
+						open("clubcoordinator.php","_self");
 
 					}
 					else if(first=="13"){

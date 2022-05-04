@@ -23,12 +23,8 @@
 			$query=$db->prepare('UPDATE activity SET flag=? WHERE aid=?');
 			$datarow=$check->fetch();
 			$flagvalue=$datarow['flag'];
-
-			//0 for non approved activities
-			//-1 for deleted activities
-
 			if($flagvalue=="0")
-			$data=array(-1,$uid);
+			$data=array(1,$uid);
 			else 
 			$data=array(0,$uid);
 

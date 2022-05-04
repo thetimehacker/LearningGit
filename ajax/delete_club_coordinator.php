@@ -3,14 +3,13 @@
 	include('../connection.php');
 
 	$uid = $_POST['uid'];
-	// $email= $_POST['email'];
 
 	if(validate()){
 
 		//preparing a query
 		//we will be checking both email and password
 		
-		$check=$db->prepare('SELECT * FROM activity WHERE  aid = ?');
+		$check=$db->prepare('SELECT * FROM signup WHERE  (sid = ?)');
 		$data=array($uid); //for below 'if' statement
 
 		$check->execute($data);
@@ -19,18 +18,9 @@
 		}
 		else{
 			
-			//update if account exist
-			$query=$db->prepare('UPDATE activity SET flag=? WHERE aid=?');
-			$datarow=$check->fetch();
-			$flagvalue=$datarow['flag'];
-
-			//0 for non approved activities
-			//-1 for deleted activities
-
-			if($flagvalue=="0")
-			$data=array(-1,$uid);
-			else 
-			$data=array(0,$uid);
+			//delete if account exist
+			$query=$db->prepare('DELETE FROM signup WHERE sid=?');
+			$data=array($uid);
 
 			//execute 
 			if($query->execute($data)){

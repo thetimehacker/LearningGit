@@ -2,6 +2,8 @@
 
 	include('../connection.php');
 
+	session_start();
+
 	//-->> trim all the data using a trim function
 	$uname = $_POST['username'];
 	$pass = $_POST['password'];
@@ -28,6 +30,8 @@
 			//fetch the data from database
 			$datarow=$check->fetch();
 
+			$_SESSION['uid']=$datarow['sid'];
+			$_SESSION['tid']=$datarow['tid'];
 			//flag will define whether the higher authorities have allowed them or not
 			if($pass==$datarow['password']){
 				//valid details
@@ -48,6 +52,7 @@
 					$arr="13,";
 					$arr.=(string)$datarow['sid'];
 					// echo $arr;
+					
 					echo $arr;
 				}
 				else{

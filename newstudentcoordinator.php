@@ -102,56 +102,16 @@ div.content {
 					<!-- //all club coordinators -->
 		
 
-	<div class="col-sm-12">
-			<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
-				<div class="admin_heading" style="margin-bottom: 20px;">
-					<h1 style="text-align: center;">All Activities</h1>
-				</div>
-				<!-- //create php  -->
-				<!-- <h4 style="text-align: center;">Remove Club coordinator</h4> -->
-			
-				<!-- </table> -->
-				<?php
-					session_start();
-					
-					include('connection.php');
-					$check=$db->prepare('SELECT * FROM activity where sid="5" Order by date DESC');
-					$check->execute();
-					if($check->rowcount()==0){
-						echo 'Empty Table'; //->> 0 for account does not exist
-					}
-
-					else{
-						echo "<table>
-							<tr>
-							<th>Id</th>
-							<th>Date</th>
-							<th>Activity Name</th>
-							<th>Description</th>
-							</tr>";
-						while($datarow=$check->fetch()){
-							echo "<tr><td>" . $datarow["aid"]. "</td><td>" . $datarow["date"] ."</td><td>" . $datarow["aname"] . "</td><td>". $datarow["description"]. "</td></tr>";
-						}
-						echo "</table>";
-						
-					}
-
-				?>
-
-			</div>
-		</div>
-
-
-		<!-- //new row -->
+			<!-- //new row -->
 		<div class="col-sm-12">
 
 			<div class="col-sm-6">
 				
-					
+					<!-- Add a new activity -->
 				<div class="add_club_coordinator" style="margin-bottom: 20px;">
 					<div class="admin_heading">
-					<h1 style="text-align: center;">Add a New Activity</h1>
-				</div>
+						<h1 style="text-align: center;">Add a New Activity</h1>
+					</div>
 					<form id="activityform">
 						<div class="form-group">
 							<input type="text" id="title" placeholder="Title" class="form-control" required>
@@ -173,31 +133,149 @@ div.content {
 						</div>	
 					</form>
 				</div>
+
 			</div>
 			
-
 			<div class="col-sm-6">
 
-					<div class="add_club_coordinator" style="margin-bottom: 20px;">
-					<div class="admin_heading">
-					<h1 style="text-align: center;">Delete an Activity</h1>
-				</div>
-					<form id="activityform">
-						<div class="form-group">
-							<input type="text" id="delete_id" placeholder="Activity Id" class="form-control" required>
-						</div>
-						
-						<div class="form-group">
-							<input type="submit" value="Submit" class="btn btn-danger btn-block" onclick="deletedata();">
-						</div>	
-					</form>
-				</div>
 			</div>
 
 		</div>
+	<div class="col-sm-12">
+			<!-- All Activities -->
+			<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
+				<div class="admin_heading" style="margin-bottom: 20px;">
+					<h1 style="text-align: center;">All Activities</h1>
+				</div>
+				<!-- //create php  -->
+				<!-- <h4 style="text-align: center;">Remove Club coordinator</h4> -->
+			
+				<!-- </table> -->
+				<?php
+					session_start();
+					
+					include('connection.php');
+					$check=$db->prepare('SELECT * FROM activity where (tid=? and flag=0) Order by date DESC');
+					$data=array($_SESSION['tid']);
+					$check->execute($data);
+					if($check->rowcount()==0){
+						echo 'Empty Table'; //->> 0 for account does not exist
+					}
+
+					else{
+						?>
+						<table>
+							<tr>
+							<th>TId</th>	
+							<th>SId</th>
+							<th>Date</th>
+							<th>Activity Name</th>
+							<th>Description</th>
+							<th>action</th>
+							</tr>
+
+						<?php
+						while($datarow=$check->fetch()){
+							?>
+							
+							<tr>
+									<td><?php echo $datarow['tid'] ?></td>
+									<td><?php echo $datarow['sid'] ?></td>
+									<td><?php echo $datarow['date'] ?></td>
+									<td><?php echo $datarow['aname'] ?></td>
+									<td><?php echo $datarow['description'] ?></td>
+									<td><button onclick="deleteactivity(<?php echo $datarow['aid'] ?>)" 
+										style="text-decoration:none;
+										background: red;
+										border: none;
+										border-radius: 5px;
+										padding: 0px 10px;
+										color: white;
+										margin: 10px;">Delete</button></td>
+								</tr>
+
+
+
+							<?php
+						}
+						echo "</table>";
+						
+					}
+
+				?>
+
+			</div>
+
+			<!-- Delete Activities -->
+			<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
+				<div class="admin_heading" style="margin-bottom: 20px;">
+					<h1 style="text-align: center;">Deleted Activities</h1>
+				</div>
+				<!-- //create php  -->
+				<!-- <h4 style="text-align: center;">Remove Club coordinator</h4> -->
+			
+				<!-- </table> -->
+				<?php
+					session_start();
+					
+					include('connection.php');
+					$check=$db->prepare('SELECT * FROM activity where (tid=? and flag=-1) Order by date DESC');
+					$data=array($_SESSION['tid']);
+					$check->execute($data);
+					if($check->rowcount()==0){
+						echo 'Empty Table'; //->> 0 for account does not exist
+					}
+
+					else{
+						?>
+						<table>
+							<tr>
+							<th>TId</th>	
+							<th>SId</th>
+							<th>Date</th>
+							<th>Activity Name</th>
+							<th>Description</th>
+							<th>action</th>
+							</tr>
+
+						<?php
+						while($datarow=$check->fetch()){
+							?>
+							
+							<tr>
+									<td><?php echo $datarow['tid'] ?></td>
+									<td><?php echo $datarow['sid'] ?></td>
+									<td><?php echo $datarow['date'] ?></td>
+									<td><?php echo $datarow['aname'] ?></td>
+									<td><?php echo $datarow['description'] ?></td>
+									<td><button onclick="deleteactivity(<?php echo $datarow['aid'] ?>)" 
+										style="text-decoration:none;
+										background: green;
+										border: none;
+										border-radius: 5px;
+
+										padding: 0px 10px;
+										color: white;
+										margin: 10px;">Add</button></td>
+								</tr>
+
+
+
+							<?php
+						}
+						echo "</table>";
+						
+					}
+
+				?>
+
+			</div>
+		</div>
+
 	</section>
 </div>
 <script type="text/javascript">
+
 	function savedata(){
 		var title=document.getElementById('title').value;
 		var date=document.getElementById('date').value;
@@ -240,9 +318,9 @@ div.content {
 		}
 		
 	}
-	function deletedata(){
-		var uid=document.getElementById('delete_id').value;
-
+	function deleteactivity(uid){
+		// =document.getElementById('delete_id').value;
+// alert(uid);
 		// alert(uid+" "+email);
 		if(uid!=""){
 			
@@ -256,11 +334,11 @@ div.content {
 				data:{uid:uid},
 				success:function(data){
 					if(data==0){
-						alert('Activity Does not exist!!!');
+						// alert('Activity Does not exist!!!');
 					}
 					else if(data == 1){
 						//account created
-						alert('Successfully Deleted Activity!!!');
+						// alert('Successfully Deleted Activity!!!');
 						open("newstudentcoordinator.php","_self"); //refresh the page
 
 					}

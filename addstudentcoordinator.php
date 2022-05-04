@@ -11,105 +11,107 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <style >
-table {
-border-collapse: collapse;
-width: 100%;
-/*overflow: auto;*/
-color: #588c7e;
-font-family: monospace;
-font-size: 20px;
-text-align: left;
-}
-th {
-background-color: #588c7e;
-color: white;
-}
-tr:nth-child(even) {background-color: #f2f2f2}
-</style>
-<style>
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
+		table {
+		border-collapse: collapse;
+		width: 100%;
+		/*overflow: auto;*/
+		color: #588c7e;
+		font-family: monospace;
+		font-size: 20px;
+		text-align: left;
+		}
+		th {
+		background-color: #588c7e;
+		color: white;
+		}
+		tr:nth-child(even) {background-color: #f2f2f2}
+	</style>
+	<style>
+		body {
+		  margin: 0;
+		  font-family: "Lato", sans-serif;
+		}
 
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: black;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-  font-size: 20px;
-}
+		.sidebar {
+		  margin: 0;
+		  padding: 0;
+		  width: 200px;
+		  background-color: black;
+		  position: fixed;
+		  height: 100%;
+		  overflow: auto;
+		  font-size: 20px;
+		}
 
-.sidebar a {
-  display: block;
-  color: white;
-  padding: 16px;
-  text-decoration: none;
-}
- 
-.sidebar a.active {
-  background-color: white;
-  color: black;
-}
+		.sidebar a {
+		  display: block;
+		  color: white;
+		  padding: 16px;
+		  text-decoration: none;
+		}
+		 
+		.sidebar a.active {
+		  background-color: white;
+		  color: black;
+		}
 
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
+		.sidebar a:hover:not(.active) {
+		  background-color: #555;
+		  color: white;
+		}
 
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  /*height: 1000px;*/
-}
+		div.content {
+		  margin-left: 200px;
+		  padding: 1px 16px;
+		  /*height: 1000px;*/
+		}
 
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
+		@media screen and (max-width: 700px) {
+		  .sidebar {
+		    width: 100%;
+		    height: auto;
+		    position: relative;
+		  }
+		  .sidebar a {float: left;}
+		  div.content {margin-left: 0;}
+		}
 
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
-</style>
+		@media screen and (max-width: 400px) {
+		  .sidebar a {
+		    text-align: center;
+		    float: none;
+		  }
+		}
+	</style>
 </head>
 <body> 
   
-
 <div class="sidebar">
-  <a class="active" href="#home">Home</a>
+  <a href="clubcoordinator.php">Home</a>
+  <a class="active" href="addstudentcoordinator.php">Add Coordinator</a>
+  <a href="approveactivities.php">Events</a>
   <a href="index.php">Sign Out</a>
 </div>
+
 
 <div class="content">
   <section id="adminform" class="section_class">
 		<div class="col-sm-12">
 			<div class="col-sm-6">
-					<!-- //all club coordinators -->
+					<!-- //student coordinators -->
 					
 			
 					<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
 						<div class="admin_heading" style="margin-bottom: 20px;">
-							<h1 style="text-align: center;">All Club Coordinators</h1>
+							<h1 style="text-align: center;">Student Coordinators</h1>
 						</div>
 						<?php
 							session_start();
 							
 							include('connection.php');
-							$check=$db->prepare('SELECT * FROM signup where value="club_coordinator"');
-							
-							$check->execute();
+							$check=$db->prepare('SELECT * FROM signup where value="student_coordinator" and tid=?');
+							$data=array($_SESSION['uid']);
+							$check->execute($data);
 							if($check->rowcount()==0){
 								echo 'Empty Table'; //->> 0 for account does not exist
 							}
@@ -163,7 +165,7 @@ div.content {
 				
 					<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
 						<div class="admin_heading" style="margin-bottom: 20px;">
-							<h1 style="text-align: center;">Add Club Coordinator</h1>
+							<h1 style="text-align: center;">Add Student Coordinator</h1>
 						</div>
 						<form id="adminform">
 							<div class="form-group">
@@ -203,7 +205,7 @@ div.content {
 			$.ajax(
 			{
 				type:"POST",
-				url:"ajax/admin.php",
+				url:"ajax/add_student_coordinator.php",
 				data:{uid:uid,password:pass1,email:email}, //cvalue will be passed in ajax
 				success:function(data){
 					//we are getting the result in form of data from the signup php
@@ -213,7 +215,7 @@ div.content {
 					else if(data == 1){
 						//account created
 						// alert('Successfully created club coordinator!!!');
-						open("newadmin.php","_self"); //refresh the page
+						open("addstudentcoordinator.php","_self"); //refresh the page
 
 					}
 					else if(data == 2){
@@ -254,7 +256,7 @@ div.content {
 					else if(data == 1){
 						//account created
 						// alert('Successfully Deleted Activity!!!');
-						open("newadmin.php","_self"); //refresh the page
+						open("addstudentcoordinator.php","_self"); //refresh the page
 
 					}
 					else if(data == 2){

@@ -3,15 +3,14 @@
 	include('../connection.php');
 
 	$uid = $_POST['uid'];
-	$email= $_POST['email'];
 
 	if(validate()){
 
 		//preparing a query
 		//we will be checking both email and password
 		
-		$check=$db->prepare('SELECT * FROM signup WHERE  (email = ? AND sid = ? AND value="club_coordinator")');
-		$data=array($email,$uid); //for below 'if' statement
+		$check=$db->prepare('SELECT * FROM club WHERE  (cid = ?)');
+		$data=array($uid); //for below 'if' statement
 
 		$check->execute($data);
 		if($check->rowcount()==0){
@@ -20,7 +19,7 @@
 		else{
 			
 			//delete if account exist
-			$query=$db->prepare('DELETE FROM signup WHERE sid=?');
+			$query=$db->prepare('DELETE FROM club WHERE cid=?');
 			$data=array($uid);
 
 			//execute 

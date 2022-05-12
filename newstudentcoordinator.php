@@ -138,14 +138,80 @@ div.content {
 			
 			<div class="col-sm-6">
 
+
+
 			</div>
 
 		</div>
 	<div class="col-sm-12">
+
+			<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
+				<div class="admin_heading" style="margin-bottom: 20px;">
+					<h1 style="text-align: center;">Approved Activities</h1>
+				</div>
+				<!-- //create php  -->
+				<!-- <h4 style="text-align: center;">Remove Club coordinator</h4> -->
+			
+				<!-- </table> -->
+				<?php
+					session_start();
+					
+					include('connection.php');
+					$check=$db->prepare('SELECT * FROM activity where (tid=? and flag=1) Order by date DESC');
+					$data=array($_SESSION['tid']);
+					$check->execute($data);
+					if($check->rowcount()==0){
+						echo 'Empty Table'; //->> 0 for account does not exist
+					}
+
+					else{
+						?>
+						<table>
+							<tr>
+							<th>TId</th>	
+							<th>SId</th>
+							<th>Date</th>
+							<th>Activity Name</th>
+							<th>Description</th>
+							<th>action</th>
+							</tr>
+
+						<?php
+						while($datarow=$check->fetch()){
+							?>
+							
+							<tr>
+									<td><?php echo $datarow['tid'] ?></td>
+									<td><?php echo $datarow['sid'] ?></td>
+									<td><?php echo $datarow['date'] ?></td>
+									<td><?php echo $datarow['aname'] ?></td>
+									<td><?php echo $datarow['description'] ?></td>
+									<td><button onclick="deleteactivity(<?php echo $datarow['aid'] ?>)" 
+										style="text-decoration:none;
+										background: red;
+										border: none;
+										border-radius: 5px;
+										padding: 0px 10px;
+										color: white;
+										margin: 10px;">Delete</button></td>
+								</tr>
+
+
+
+							<?php
+						}
+						echo "</table>";
+						
+					}
+
+
+				?>
+
+			</div>
 			<!-- All Activities -->
 			<div class="admin_tick" style="text-align: left;margin-bottom: 20px;">
 				<div class="admin_heading" style="margin-bottom: 20px;">
-					<h1 style="text-align: center;">All Activities</h1>
+					<h1 style="text-align: center;">Pending Approval </h1>
 				</div>
 				<!-- //create php  -->
 				<!-- <h4 style="text-align: center;">Remove Club coordinator</h4> -->
